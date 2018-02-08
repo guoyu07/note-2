@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>doc</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css">
+  <link rel="stylesheet" href="//unpkg.com/docsify-copy-code/styles.css">
+</head>
+<body>
+  <div id="app">加载中...</div>
+  <script src="//unpkg.com/docsify-copy-code/index.js"></script>
+  <script>
+    window.$docsify = {
+      name: 'note', // 文档标题
+      loadSidebar: true, // 自定义侧边导航栏
+      subMaxLevel: 2, // 	设置二级标题自动生成目录
+      auto2top: true, // 切换页面后自动跳转到页面顶部
+      // repo: 'haloislet/doc-site-template',  // 在右上角显示 GitHub Corner 挂件 
+      // ga: 'UA-113489240-1', // google analytics
+      search: { // 全文搜索自定义
+        noData: {
+          '/': '没有结果!'
+        },
+        placeholder: {
+          '/': '搜索'
+        }
+      },
+      formatUpdated: '{YYYY}/{MM}/{DD}  {HH}:{mm}', // 日期格式化
+      plugins: [
+        window.DocsifyCopyCodePlugin.init(),
+        // 添加更新日期和编辑文档
+        function(hook, vm) { 
+          hook.beforeEach(function (html) {
+            var url = 'https://github.com/haloislet/doc-site-template/blob/master/docs/' + vm.route.file
+            var editHtml = '[:memo: Edit Document](' + url + ')\n'
+            return editHtml
+              + html
+              + '\n'
+              + '<hr>'
+              + 'Last modified {docsify-updated} '
+              + editHtml
+          })
+        }
+      ]
+    }
+  </script>
+  <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
+  <!-- 搜索插件，可自定义配置 -->
+  <script src="//unpkg.com/docsify/lib/plugins/search.js"></script> 
+  <!-- emoji 插件 -->
+  <script src="//unpkg.com/docsify/lib/plugins/emoji.min.js"></script>
+  <!-- 图片缩放插件 -->
+  <script src="//unpkg.com/docsify/lib/plugins/zoom-image.min.js"></script>
+  <!-- google analytics 插件 -->
+  <!-- <script src="//unpkg.com/docsify/lib/plugins/ga.js"></script> -->
+</body>
+</html>
